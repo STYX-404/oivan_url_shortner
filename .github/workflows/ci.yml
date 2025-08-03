@@ -34,6 +34,9 @@ jobs:
         ruby-version: '3.2.0'
         bundler-cache: true
 
+    - name: Install dependencies
+      run: bundle install
+
     - name: Setup database
       env:
         DATABASE_URL: postgresql://postgres:password@localhost:5432/url_shortener_test
