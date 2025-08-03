@@ -43,7 +43,7 @@ RSpec.describe Url, type: :model do
   describe 'URL generation' do
     it 'generates URLs with correct format' do
       url = create(:url)
-      domain_url = Rails.application.credentails[:domain_url]
+      domain_url = Rails.application.credentials[:domain_url]
       expect(url.short_url).to match(%r{\A#{Regexp.escape(domain_url)}/.+\z})
     end
   end
