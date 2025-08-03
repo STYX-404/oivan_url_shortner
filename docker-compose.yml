@@ -9,5 +9,21 @@ services:
       - 3000:3000
     environment:
       - RAILS_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/url_shortener_development
     command: ["/docker/entrypoint.sh"]
-
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: postgres:16.1-bullseye
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=url_shortener_development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+volumes:
+  postgres:
