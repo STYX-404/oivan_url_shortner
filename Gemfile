@@ -39,7 +39,6 @@ gem 'bootsnap', require: false
 # gem "rack-cors"
 
 gem 'byebug', '~> 12.0'
-gem 'dotenv-rails'
 
 # API documentation
 gem 'rswag-api'

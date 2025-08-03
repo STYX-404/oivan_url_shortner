@@ -15,6 +15,6 @@ class RedirectsController < ApplicationController
 
   def set_url
     uniq_key = params[:uniq_key]
-    @url = Url.find_by(short_url: "#{ENV.fetch('DOMAIN_URL')}/#{uniq_key}")
+    @url = Url.find_by(short_url: "#{Rails.application.credentails[:domain_url]}/#{uniq_key}")
   end
 end
