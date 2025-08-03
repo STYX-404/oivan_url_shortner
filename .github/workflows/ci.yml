@@ -33,11 +33,16 @@ jobs:
         bundle exec rake db:migrate
 
     - name: Run RuboCop
+      env:
+        RAILS_ENV: test
       run: bundle exec rubocop
 
     - name: Run RSpec tests
       run: bundle exec rspec
 
     - name: Run RSpec tests
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        RAILS_ENV: test
       run: bundle exec rspec
       continue-on-error: true
