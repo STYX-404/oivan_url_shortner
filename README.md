@@ -15,7 +15,7 @@ A simple and efficient URL shortening service built with Ruby on Rails. This API
 
 - **Ruby**: 3.2.0
 - **Rails**: 7.1.0
-- **Database**: SQLite3 (for demo purposes)
+- **Database**: Postgresql
 - **API Documentation**: Rswag (Swagger/OpenAPI)
 - **Testing**: RSpec with FactoryBot
 
@@ -167,3 +167,29 @@ end
 
 - **Key Space**: With 2-10 character keys using base64, we have approximately 64^2 to 64^10 possible combinations
 - **Collision Probability**: Extremely low due to random generation and retry mechanism
+
+## Security Vulnerabilities and Solutions
+
+### 1. Open Redirect Vulnerability
+
+**Risk**: The application allows redirecting to any external URL without validation, enabling phishing attacks and potential data exfiltration. Attackers could create short URLs that redirect users to malicious sites designed to steal credentials or personal information.
+
+**Solution**: Implement URL validation and domain whitelisting to ensure redirects only go to trusted domains. This prevents attackers from using the URL shortener as a proxy for malicious redirects.
+
+### 2. No Authentication/Authorization
+
+**Risk**: The API is completely open with no authentication, allowing anyone to create unlimited short URLs, access all URL mappings, and potentially abuse the service. This could lead to spam, resource exhaustion, and unauthorized access to URL data.
+
+**Solution**: Implement API key authentication or JWT tokens to control access to the URL shortening service. This ensures only authorized users can create and manage short URLs.
+
+### 3. Missing Rate Limiting
+
+**Risk**: Without rate limiting, the service is vulnerable to abuse and potential DoS attacks. Malicious actors could overwhelm the system with requests, making it unavailable for legitimate users.
+
+**Solution**: Implement rate limiting to restrict the number of requests per user or IP address within a specific time period. This prevents abuse while ensuring fair usage for all users.
+
+### 4. CORS Configuration Issues
+
+**Risk**: Cross-Origin Resource Sharing (CORS) is not properly configured, which could cause issues in production environments and potentially expose the API to unauthorized cross-origin requests.
+
+**Solution**: Configure CORS properly to specify which origins are allowed to access the API. This prevents unauthorized domains from making requests to the URL shortening service.
