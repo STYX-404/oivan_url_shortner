@@ -109,6 +109,7 @@ bundle exec rspec
 
 ### Swagger Documentation
 Access the live API documentation at: [https://oivan-url-shortner.onrender.com/api-docs/index.html]
+*Please note: The Render free tier will automatically shut down the service if it is inactive for 15 minutes. As a result, starting up the service may take some time. Alternatively, you can run the project locally for faster access.*
 
 ## Scaling Considerations
 
