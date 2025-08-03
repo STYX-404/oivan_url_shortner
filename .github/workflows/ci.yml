@@ -25,6 +25,9 @@ jobs:
         sudo apt-get install -y sqlite3 libsqlite3-dev
 
     - name: Setup database
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        RAILS_ENV: test
       run: |
         bundle exec rake db:create
         bundle exec rake db:migrate
