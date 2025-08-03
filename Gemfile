@@ -38,9 +38,6 @@ gem 'bootsnap', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
-gem 'byebug', '~> 12.0'
-
-# API documentation
 gem 'rswag-api'
 gem 'rswag-specs'
 gem 'rswag-ui'
@@ -50,6 +47,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # Testing framework
+  gem 'byebug', '~> 12.0'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
