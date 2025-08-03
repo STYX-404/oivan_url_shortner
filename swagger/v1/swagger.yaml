@@ -1,0 +1,45 @@
+---
+openapi: 3.0.1
+info:
+  title: URL Shortener API
+  version: v1
+  description: A simple API for creating and managing short URLs
+paths:
+  "/api/v1/urls/encode":
+    post:
+      summary: Creates a short URL
+      tags:
+      - URLs
+      parameters: []
+      responses:
+        '201':
+          description: URL created
+        '422':
+          description: Invalid URL
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                url[original_url]:
+                  type: string
+              required:
+              - url[original_url]
+  "/api/v1/urls/decode":
+    get:
+      summary: Decodes a short URL
+      tags:
+      - URLs
+      parameters:
+      - name: short_url
+        in: query
+        required: true
+        example: http://localhost:3000/abc12345
+        schema:
+          type: string
+      responses:
+        '200':
+          description: URL found
+        '404':
+          description: URL not found
