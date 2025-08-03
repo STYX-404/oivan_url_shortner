@@ -10,6 +10,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16.1-bullseye
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: postgres
+          POSTGRES_DB: url_shortener_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v4
 
@@ -20,11 +35,13 @@ jobs:
         bundler-cache: true
 
     - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y sqlite3 libsqlite3-dev
+      run: bundle install
 
     - name: Setup database
+      env:
+        DATABASE_URL: postgresql://postgres:password@localhost:5432/url_shortener_test
+        RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       run: |
         bundle exec rake db:create
         bundle exec rake db:migrate
@@ -36,5 +53,6 @@ jobs:
       env:
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         RAILS_ENV: test
+        DATABASE_URL: postgresql://postgres:password@localhost:5432/url_shortener_test
       run: bundle exec rspec
       continue-on-error: true

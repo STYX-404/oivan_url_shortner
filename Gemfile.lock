@@ -164,6 +164,7 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.7)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -270,11 +271,6 @@ GEM
       rubocop-ast (>= 1.44.0, < 2.0)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    sqlite3 (1.7.3-aarch64-linux)
-    sqlite3 (1.7.3-arm-linux)
-    sqlite3 (1.7.3-arm64-darwin)
-    sqlite3 (1.7.3-x86_64-darwin)
-    sqlite3 (1.7.3-x86_64-linux)
     stringio (3.1.7)
     thor (1.4.0)
     timeout (0.4.3)
@@ -307,6 +303,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  pg (~> 1.5)
   puma (~> 6.0)
   rails (~> 7.1.0)
   rspec-rails
@@ -315,7 +312,6 @@ DEPENDENCIES
   rswag-ui
   rubocop
   rubocop-rails
-  sqlite3 (~> 1.4)
   tzinfo-data
 
 RUBY VERSION
