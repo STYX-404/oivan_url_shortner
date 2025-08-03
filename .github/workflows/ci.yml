@@ -25,20 +25,12 @@ jobs:
         sudo apt-get install -y sqlite3 libsqlite3-dev
 
     - name: Setup database
-      env:
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        RAILS_ENV: test
       run: |
         bundle exec rake db:create
         bundle exec rake db:migrate
 
     - name: Run RuboCop
-      env:
-        RAILS_ENV: test
       run: bundle exec rubocop
-
-    - name: Run RSpec tests
-      run: bundle exec rspec
 
     - name: Run RSpec tests
       env:
